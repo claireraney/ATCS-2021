@@ -109,10 +109,10 @@ class TicTacToe:
             for j in range(0, 3):
                 if self.board[i][j] == "-":
                     return False
-                elif self.check_win("X") == True or self.check_win("O") == True:
-                    return False
-                else:
-                    return True
+        if self.check_win("X") == True or self.check_win("O") == True:
+            return False
+        else:
+            return True
 
 
     def play_game(self):
@@ -120,11 +120,11 @@ class TicTacToe:
         self.print_instructions()
         self.print_board()
         player = "X"
-        while self.check_win(player) == False and self.check_tie() == False:
+        while (True):
             self.take_turn(player)
             self.print_board()
-            self.check_win(player)
-            self.check_tie()
+            if self.check_win(player) or self.check_tie():
+                break
             if player == "X":
                 player = "O"
             else:
