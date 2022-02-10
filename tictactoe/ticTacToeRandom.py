@@ -52,7 +52,7 @@ class TicTacToe:
         while(True):
             r = int(input("Please enter the row you want to place your piece at: "))
             c = int(input("Please enter the col you want to place your piece at: "))
-            if self.is_valid_move(r, c):
+            if self.is_valid_move(player, r,c):
                 self.place_player(player, r, c)
             else:
                 print("Input again.")
@@ -61,6 +61,8 @@ class TicTacToe:
     def take_turn(self, player):
         # TODO: Simply call the take_manual_turn function
         self.take_manual_turn(player)
+
+    def take_random_turn(self, player):
 
     def check_col_win(self, player):
         # TODO: Check col win
