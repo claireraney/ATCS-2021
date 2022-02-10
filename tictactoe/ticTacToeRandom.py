@@ -64,6 +64,7 @@ class TicTacToe:
 
     def take_random_turn(self, player):
 
+
     def check_col_win(self, player):
         # TODO: Check col win
         for i in range(0, 3):

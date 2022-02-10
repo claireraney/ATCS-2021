@@ -49,10 +49,12 @@ class TicTacToe:
     def take_manual_turn(self, player):
         # TODO: Ask the user for a row, col until a valid response
         #  is given them place the player's icon in the right spot
-        while(True):
+        valid = False
+        while(valid == False):
             r = int(input("Please enter the row you want to place your piece at: "))
             c = int(input("Please enter the col you want to place your piece at: "))
-            if self.is_valid_move(r, c):
+            valid = self.is_valid_move(r, c)
+            if valid == True:
                 self.place_player(player, r, c)
             else:
                 print("Input again.")
