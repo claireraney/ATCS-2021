@@ -53,6 +53,11 @@ for i in range(len(labels)):
 print(name)
 
 
+# psuedocoding for finding song to reccomend based on the cluster of the song given
+# given song variable
+# given song cluster variable
+# get reccomendation by randomly picking one of the songs in the cluster that the given song comes from
+# return song recommendation
 
 
 
