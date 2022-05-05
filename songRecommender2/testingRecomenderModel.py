@@ -9,7 +9,7 @@ import csv
 data = pd.read_csv("spotify_taylorswift.csv")
 x = data[["danceability", "tempo"]]
 
-# gotten from stack overflow, does this work??
+# choosing a random song from the csv to use as the given song
 index = random.randint(1, 170)
 print("Given song: ", data.iloc[index]["name"])
 
@@ -17,9 +17,24 @@ print("Given song: ", data.iloc[index]["name"])
 scaler = StandardScaler().fit(x)
 x = scaler.transform(x)
 
+
+# Calculate internia for K = 1 to 20
+inertias = []
+for k in range (1, 20):
+    # Build and fit the model
+    kmeanModel = KMeans(n_clusters=k).fit(x)
+    # Store the inertias
+    inertias.append(kmeanModel.inertia_)
+
+# Plot the inertias to find the elbow
+plt.plot(range(1, 20), inertias, 'bx-')
+plt.xlabel("Values of K")
+plt.ylabel("Inertia")
+plt.show()
+
 ''' Create the Model '''
-# based on number of albums
-k = 9
+# based on the elbow method
+k = 5
 km = KMeans(n_clusters=k).fit(x)
 
 # Get the centroids and label values
@@ -36,10 +51,20 @@ plt.figure(figsize=(5,4))
 for i in range(k):
     # Get all the points x[n] where labels[n] == the label i
     cluster = x[labels == i]
-    # Get the income and the spending values for each point in the cluster
+    # Get the danceability and the tempo values for each point in the cluster
     cluster_danceability = cluster[:, 0]
     cluster_tempo = cluster[:, 1]
     plt.scatter(cluster_danceability, cluster_tempo)
+plt.show()
+
+# cluster based on the dancibility and tempo for each album
+albums = data["album"].unique()
+for i in range (len(albums)):
+    cluster = data.loc[data['album'] == albums[i]]
+    cluster_danceability = cluster["danceability"]
+    cluster_tempo = cluster["tempo"]
+    plt.scatter(cluster_danceability, cluster_tempo)
+
 
 # Plot the centroids
 centroids_danceability = centroids[:, 0]
@@ -54,15 +79,12 @@ plt.ylabel("Tempo")
 plt.show()
 
 
-# psuedocoding for finding song to reccomend based on the cluster of the song given
-# cluster number of song given is labels[index]
+# recommending based on being in the same cluster
 for i in range(1,170):
     if labels[i] == labels[index] and i != index:
         print("Recommended song: ", data.iloc[i]["name"])
         break
-# given song cluster variable
-# get reccomendation by randomly picking one of the songs in the cluster that the given song comes from
-# return song recommendation
+
 
 
 
