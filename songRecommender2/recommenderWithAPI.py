@@ -29,7 +29,6 @@ def main():
      givenArtist = input("Enter the artist of your song: ")
 
      # calling methods
-
      # finds URI for given song
      songURI = searchForSong(givenSong, givenArtist)
 
@@ -93,7 +92,6 @@ def getFeaturesOfSong(songURI):
     row = (artist[0], track[0], danceability[0], tempo[0])
 
     return row
-
 
 # identifies 300 songs for given artist and creates data frame of songs and attributes
 def getAllSongsFromArtist(artist):
