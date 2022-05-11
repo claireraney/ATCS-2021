@@ -1,3 +1,4 @@
+# by Claire Raney
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
@@ -55,7 +56,15 @@ for i in range(k):
     cluster_danceability = cluster[:, 0]
     cluster_tempo = cluster[:, 1]
     plt.scatter(cluster_danceability, cluster_tempo)
-plt.show()
+# plt.show()
+
+# cluster based on the dancibility and tempo for each album
+albums = data["album"].unique()
+for i in range (len(albums)):
+    cluster = data.loc[data['album'] == albums[i]]
+    cluster_danceability = cluster["danceability"]
+    cluster_tempo = cluster["tempo"]
+    plt.scatter(cluster_danceability, cluster_tempo)
 
 # cluster based on the dancibility and tempo for each album
 albums = data["album"].unique()
